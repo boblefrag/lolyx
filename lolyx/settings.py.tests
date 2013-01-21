@@ -1,3 +1,4 @@
+# -*- mode: python -*-
 # Django settings for lolyx project.
 
 DEBUG = True
@@ -117,13 +118,17 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django_jenkins',
     'django_nose',
+    'registration',
     'djcelery',
     'lolyx.llx',
+    'lolyx.resume',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+ACCOUNT_ACTIVATION_DAYS = 7
 
 JENKINS_TASKS = (
     'django_jenkins.tasks.django_tests',

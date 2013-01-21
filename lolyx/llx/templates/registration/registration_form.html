@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<div class="page-header well">
+  <h2>{% trans "Créer un compte" %}</h2>
+
+  <form method="post" action=".">
+    {% csrf_token %}
+    {{ form.as_p }}
+    
+    <input type="submit" class="btn btn-primary" value="{% trans 'Envoyer !' %}" />
+  </form>
+</div>
+{% endblock %}

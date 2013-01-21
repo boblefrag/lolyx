@@ -20,6 +20,7 @@ The django views
 """
 import logging
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from lolyx.llx.models import Job
 
 logger = logging.getLogger(__name__)
@@ -33,3 +34,13 @@ def home(request):
     return render(request,
                   'home.html',
                   {'last_jobs': last_jobs})
+
+
+@login_required
+def profile(request):
+    """The profile wiew
+    """
+
+    return render(request,
+                  'profile.html',
+                  {})

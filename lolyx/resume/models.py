@@ -28,4 +28,4 @@ class Resume(models.Model):
     title = models.CharField(max_length=300,
                              verbose_name='Title')
 
-
+    status = models.IntegerField(default=0)
