@@ -29,4 +29,5 @@ Debian
 ------
 
  * python-requests
- * python-imaging
+ * python-django
+ * python-django-celery

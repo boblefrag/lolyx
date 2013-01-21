@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<div class="well">
+  <div class="row">
+    
+    <div class="span6"><h3>{{package.name}}</h3></div>
+
+    <div class="span2">
+      <span class="badge badge-info">{{package.latest_version}}</span> 
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="span10"><p>
+      ref : <a href="{{package.link}}" target="_blank">{{package.link}}</a></p>
+    </div>    
+  </div>
+
+  <div class="row">
+    <div class="span10">
+      <a class="btn btn-primary" target="#">{% trans "Subscribe" %}</a>
+      <a class="btn btn-primary" href="/pypi/{{package.name}}/add/">{% trans "Add package" %}</a>
+    </div>    
+  </div>
+</div>
+
+<div id="pack_subs" class="row">
+    
+  <div class="span12">
+    <div class="well">
+      <h3>Subscribe</h3>
+      <p>
+      You will receive an email for each new version of
+      {{package.name}} and for each new distribution package associate to it.</p>
+      <form class="form-inline" action="/pypi/{{package.name}}/" method="post">
+	{% csrf_token %}
+	<label class="control-label" for="inputEmail">{% trans "Email" %}</label>
+	{{form.email}} {{form.email.errors}}
+	
+	<input type="submit" class="btn btn-primary" value="{% trans "Subscribe" %}" />
+      </form>
+    </div>
+  </div>
+</div>
+
+<h3>Available packages</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>{% trans "Distribution" %}</th>
+      <th>{% trans "Package name" %}</th>
+      <th>{% trans "Version" %}</th>
+      <th>{% trans "Provide" %}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for package in dispacks %}
+    <tr>
+      <td>
+	{{package.distribution.name}} {{package.distribution.version_name}}
+      </td>
+      <td><a target="_blank" href="{{package.link}}">{{package.name}}</a></td>
+      <td>
+	<span class="badge badge-info">{{package.version}}</span> 
+      </td>
+      <td>
+	{{package.package_version}}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="span12">
+    <pre>{{package.description}}</pre>
+  </div>
+</div>
+
+{% endblock %}
+
