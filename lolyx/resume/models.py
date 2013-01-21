@@ -19,6 +19,7 @@
 Models definition for resume
 """
 from django.db import models
+from django.contrib.auth.models import User
 
 class Resume(models.Model):
     """
@@ -29,3 +30,5 @@ class Resume(models.Model):
                              verbose_name='Title')
 
     status = models.IntegerField(default=0)
+
+    user = models.ForeignKey(User)

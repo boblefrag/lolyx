@@ -28,11 +28,20 @@ class ResumeTests(TestCase):  # pylint: disable-msg=R0904
     """
     The main tests
     """
+    def setUp(self):
+        """
+        set up the tests
+        """
+        self.user = User.objects.create_user('foobar',
+                                             'admin_search@bar.com',
+                                             'admintest')
+
 
     def test_create(self):
         """
         Create a simple resume
         """
-        resume = Resume.objects.create(title='Senior admin')
+        resume = Resume.objects.create(title='Senior admin',
+                                       user=self.user)
 
         self.assertTrue(resume.id > 0)

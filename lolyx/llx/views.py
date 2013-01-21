@@ -16,12 +16,14 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 """
-The django views
+The Lolyx llx views
 """
 import logging
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from lolyx.llx.models import Job
+from lolyx.resume.models import Resume
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +42,7 @@ def home(request):
 def profile(request):
     """The profile wiew
     """
-
+    resumes = Resume.objects.filter(user=request.user)
     return render(request,
                   'profile.html',
-                  {})
+                  {'resumes': resumes})
