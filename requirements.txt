@@ -1,0 +1,21 @@
+#
+# Required packages to run Lolyx
+#
+Django>=1.4
+django-registration
+feedparser
+requests
+celery==2.5.5
+django-celery==2.5.5
+#
+#  following package are for running tests
+#
+nosexcover
+django-nose
+pep8
+flake8
+#
+#  If you use jenkins you can add
+#
+django-jenkins
+gcovr
