@@ -20,6 +20,7 @@ Test all public and private urls
 """
 from django.contrib.auth.models import User
 from django.test import TestCase
+from django.test import Client
 from lolyx.llx.models import Job
 
 
