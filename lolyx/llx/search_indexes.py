@@ -16,22 +16,19 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 """
-Unit tests for Tool
-
+Fulltext indexing with haystack
 """
-from django.test import TestCase
-from lolyx.llx.models import Tool
+from django.conf import settings
+from haystack import indexes
+from pyrede.drp.models import Package
 
 
-class ToolTests(TestCase):  # pylint: disable-msg=R0904
+class PackageIndex(indexes.RealTimeSearchIndex, indexes.Indexable):
     """
-    The main tests
+    Fulltext indexing for PyPI packages
     """
+    text = indexes.CharField(document=True, use_template=True)
+    name = indexes.CharField(model_attr='name')
 
-    def test_create(self):
-        """
-        Create a simple tool
-        """
-        tool = Tool.objects.create(name='git')
-
-        self.assertTrue(tool.id > 0)
+    def get_model(self):
+        return Package

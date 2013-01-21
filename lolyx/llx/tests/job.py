@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2012 Rodolphe Quiédeville <rodolphe@quiedeville.org>
+# Copyright (c) 2013 Rodolphe Quiédeville <rodolphe@quiedeville.org>
 #
 #     This program is free software: you can redistribute it and/or modify
 #     it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@ Unit tests for Job object
 from django.contrib.auth.models import User
 from django.test import TestCase
 from lolyx.llx.models import Job
+from lolyx.llx.models import Company
 
 
 class JobTests(TestCase):  # pylint: disable-msg=R0904
@@ -29,11 +30,12 @@ class JobTests(TestCase):  # pylint: disable-msg=R0904
     The main tests
     """
 
-
     def test_create(self):
         """
         Create a simple job
         """
-        job = Job.objects.create(title='Senior admin')
+        company = Company.objects.create(name='Lolix')
+        job = Job.objects.create(title='Senior admin',
+                                 company=company)
 
         self.assertTrue(job.id > 0)

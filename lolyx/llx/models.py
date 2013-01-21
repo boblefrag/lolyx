@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2012 Rodolphe Quiédeville <rodolphe@quiedeville.org>
+# Copyright (c) 2013 Rodolphe Quiédeville <rodolphe@quiedeville.org>
 #
 #     This program is free software: you can redistribute it and/or modify
 #     it under the terms of the GNU General Public License as published by
@@ -25,17 +25,29 @@ from datetime import datetime
 from datetime import timedelta
 
 
+class Company(models.Model):
+    """
+    The company object
+
+    """
+    name = models.CharField(max_length=300,
+                             verbose_name='Name')
+
+
 class Job(models.Model):
     """
     The job object
 
     """
+    company = models.ForeignKey(Company)
     title = models.CharField(max_length=300,
                              verbose_name='Job title',
                              blank=True)
 
     status = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_published = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
         """
@@ -45,10 +57,29 @@ class Job(models.Model):
 
     def activate(self):
         """
-        A user like this song
+        The job is activate and published online
         """
         logger = logging.getLogger(__name__)
         logger.debug('activate job %s' % self.id)
 
         self.status = 1
         self.save()
+
+
+class Tool(models.Model):
+    """
+    The tools known by candidat or required by companies
+
+    """
+    name = models.CharField(max_length=30,
+                            verbose_name='Tool name')
+
+    url = models.URLField(max_length=300)
+
+    category = models.IntegerField(default=0)
+
+    oldid = models.IntegerField(default=0)
+
+    # identi.ca category name
+    identi = models.CharField(max_length=30,
+                             blank=True)

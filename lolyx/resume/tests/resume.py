@@ -16,22 +16,23 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 """
-Unit tests for Tool
+Unit tests for Resume object
 
 """
+from django.contrib.auth.models import User
 from django.test import TestCase
-from lolyx.llx.models import Tool
+from lolyx.resume.models import Resume
 
 
-class ToolTests(TestCase):  # pylint: disable-msg=R0904
+class ResumeTests(TestCase):  # pylint: disable-msg=R0904
     """
     The main tests
     """
 
     def test_create(self):
         """
-        Create a simple tool
+        Create a simple resume
         """
-        tool = Tool.objects.create(name='git')
+        resume = Resume.objects.create(title='Senior admin')
 
-        self.assertTrue(tool.id > 0)
+        self.assertTrue(resume.id > 0)

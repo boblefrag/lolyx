@@ -16,22 +16,16 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 """
-Unit tests for Tool
-
+Models definition for resume
 """
-from django.test import TestCase
-from lolyx.llx.models import Tool
+from django.db import models
 
-
-class ToolTests(TestCase):  # pylint: disable-msg=R0904
+class Resume(models.Model):
     """
-    The main tests
+    The company object
+
     """
+    title = models.CharField(max_length=300,
+                             verbose_name='Title')
 
-    def test_create(self):
-        """
-        Create a simple tool
-        """
-        tool = Tool.objects.create(name='git')
 
-        self.assertTrue(tool.id > 0)

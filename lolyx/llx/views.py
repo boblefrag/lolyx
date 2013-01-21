@@ -19,14 +19,8 @@
 The django views
 """
 import logging
-from django.core.cache import cache
-from django.http import HttpResponse
 from django.shortcuts import render
-from django.shortcuts import redirect
-from django.shortcuts import get_object_or_404
-from django.views.generic import ListView
-from django.views.generic import DetailView
-
+from lolyx.llx.models import Job
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +29,7 @@ def home(request):
     """
     The home page
     """
+    last_jobs = Job.objects.filter(status__gt=0).order_by('-date_published')[:5]
     return render(request,
                   'home.html',
-                  {})
-
+                  {'last_jobs': last_jobs})

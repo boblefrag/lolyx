@@ -16,22 +16,19 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 """
-Unit tests for Tool
-
+Fulltext indexing with haystack
 """
-from django.test import TestCase
-from lolyx.llx.models import Tool
+from django.conf import settings
+from haystack import indexes
+from lolyx.resume.models import Resume
 
 
-class ToolTests(TestCase):  # pylint: disable-msg=R0904
+class ResumeIndex(indexes.RealTimeSearchIndex, indexes.Indexable):
     """
-    The main tests
+    Fulltext indexing for resume    
     """
+    text = indexes.CharField(document=True, use_template=True)
+    title = indexes.CharField(model_attr='title')
 
-    def test_create(self):
-        """
-        Create a simple tool
-        """
-        tool = Tool.objects.create(name='git')
-
-        self.assertTrue(tool.id > 0)
+    def get_model(self):
+        return Resume

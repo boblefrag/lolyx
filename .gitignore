@@ -7,4 +7,4 @@ docs/_build/
 whoosh_index
 .coverage
 coverage.xml
-lolix.sql
+db-lolix.sql

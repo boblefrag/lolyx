@@ -16,22 +16,23 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 """
-Unit tests for Tool
+Unit tests for Company object
 
 """
+from django.contrib.auth.models import User
 from django.test import TestCase
-from lolyx.llx.models import Tool
+from lolyx.llx.models import Company
 
 
-class ToolTests(TestCase):  # pylint: disable-msg=R0904
+class CompanyTests(TestCase):  # pylint: disable-msg=R0904
     """
     The main tests
     """
 
     def test_create(self):
         """
-        Create a simple tool
+        Create a simple company
         """
-        tool = Tool.objects.create(name='git')
+        company = Company.objects.create(name='Lolix')
 
-        self.assertTrue(tool.id > 0)
+        self.assertTrue(company.id > 0)
