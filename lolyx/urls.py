@@ -18,16 +18,18 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic.simple import redirect_to
 
+
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
                        url(r'^accounts/', include('registration.urls')),
+                       url(r'^cv/', include('lolyx.resume.urls')),
                        url(r'^accounts/profile/$', 'lolyx.llx.views.profile'),
                        url(r'^$', 'lolyx.llx.views.home', name='home'),
-                       url(r'^cv/$', 'lolyx.resume.views.home', name='resume'),
                        url(r'^search/cv/$', redirect_to, {'url': '/cv/'}),
                        url(r'^search/cv/date.php$', redirect_to, {'url': '/cv/date/'}),
 
 )
+

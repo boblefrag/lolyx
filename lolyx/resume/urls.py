@@ -15,35 +15,15 @@
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-"""
-The Lolyx llx views
-"""
-import logging
-from django.shortcuts import render
+from django.conf.urls import patterns, include, url
+from django.views.generic.simple import redirect_to
 from django.contrib.auth.decorators import login_required
-from lolyx.llx.models import Job
-from lolyx.resume.models import Resume
+from lolyx.resume.views import ResumeView
+from lolyx.resume.views import ResumeEdit
 
-logger = logging.getLogger(__name__)
-
-
-def home(request):
-    """
-    The home page
-    """
-    last_jobs = Job.objects.filter(status__gt=0).order_by('-date_published')[:5]
-    last_resumes = Resume.objects.filter(status__gt=0).order_by('-date_published')[:5]
-    return render(request,
-                  'home.html',
-                  {'last_resumes': last_resumes,
-                   'last_jobs': last_jobs})
-
-
-@login_required
-def profile(request):
-    """The profile wiew
-    """
-    my_resumes = Resume.objects.filter(user=request.user)
-    return render(request,
-                  'profile.html',
-                  {'my_resumes': my_resumes})
+urlpatterns = patterns('',
+                       url(r'^(?P<pk>\d+)/$', ResumeView.as_view()),
+                       url(r'^edit/(?P<pk>\d+)/$', login_required(ResumeEdit.as_view())),
+                       url(r'^new/$', 'lolyx.resume.views.new'),
+                       url(r'^$', 'lolyx.llx.views.home', name='resume')
+)

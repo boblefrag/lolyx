@@ -19,18 +19,59 @@
 The resume views
 """
 import logging
+
 from django.shortcuts import render
+from django.shortcuts import redirect
+from django.views.generic.detail import DetailView
+from django.contrib.auth.models import User
 from lolyx.resume.models import Resume
+from lolyx.resume.forms import ResumeForm
+
 
 logger = logging.getLogger(__name__)
 
 
-def home(request):
+class ResumeView(DetailView):
+
+    model = Resume
+
+    def get_context_data(self, **kwargs):
+        context = super(ResumeView, self).get_context_data(**kwargs)
+        context['now'] = "toto"
+        return context
+
+
+class ResumeEdit(DetailView):
+
+    model = Resume
+
+    def get_context_data(self, **kwargs):
+        context = super(ResumeEdit, self).get_context_data(**kwargs)
+        return context
+
+    def get(self, *args, **kwargs):
+        # Security to edit only own resume
+        self.object = self.get_object()
+        if self.request.user.id != self.object.user.id:
+            return redirect('/accounts/profile')
+        #return http.HttpResponsePermanentRedirect('/accounts/profile/')
+        return super(CanonicalDetailView, self).get(*args, **kwargs);
+
+
+def new(request):
     """
     The home page
     """
-    last_resumes = Resume.objects.filter(status__gt=0).order_by('-date_published')[:5]
-    return render(request,
-                  'home.html',
-                  {'last_cv': last_resumes})
+    if request.method == 'POST':
+        form = ResumeForm(request.POST)
+        if form.is_valid():
+            Resume.objects.create(title=form.cleaned_data['title'],
+                                  user=request.user)
+            return redirect('/accounts/profile/')
+    else:
+        form = ResumeForm()
 
+
+    return render(request,
+                  'resume/new.html',
+                  {'form': form})

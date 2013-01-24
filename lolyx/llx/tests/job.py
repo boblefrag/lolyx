@@ -29,6 +29,13 @@ class JobTests(TestCase):  # pylint: disable-msg=R0904
     """
     The main tests
     """
+    def setUp(self):
+        """
+        set up the tests
+        """
+        self.user = User.objects.create_user('foobar',
+                                             'admin_search@bar.com',
+                                             'admintest')
 
     def test_create(self):
         """

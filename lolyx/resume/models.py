@@ -32,3 +32,9 @@ class Resume(models.Model):
     status = models.IntegerField(default=0)
 
     user = models.ForeignKey(User)
+
+    date_published = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title

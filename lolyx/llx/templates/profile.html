@@ -2,8 +2,20 @@
 {% load i18n %}
 {% block content %}
 <div class="row">    
-  <div class="span12">
-    Mes cv
+  <div class="span6">
+    <a href="/cv/new/">Nouveau CV</a>
   </div>
+  <div class="span6">
+    <h3>Mes CV</h3>
+    <ul>
+      {% for my_resume in my_resumes %}
+      <li>
+	<a href="/cv/{{my_resume.id}}/">{{ my_resume.title }}</a>
+	<a href="/cv/edit/{{my_resume.id}}/">edit</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
 </div>
 {% endblock %}

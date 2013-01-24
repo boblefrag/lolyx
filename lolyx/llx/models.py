@@ -19,10 +19,7 @@
 Models definition for caro app
 """
 import logging
-from django.contrib.auth.models import User
 from django.db import models
-from datetime import datetime
-from datetime import timedelta
 
 
 class Company(models.Model):
@@ -31,7 +28,7 @@ class Company(models.Model):
 
     """
     name = models.CharField(max_length=300,
-                             verbose_name='Name')
+                            verbose_name='Name')
 
 
 class Job(models.Model):
@@ -82,4 +79,4 @@ class Tool(models.Model):
 
     # identi.ca category name
     identi = models.CharField(max_length=30,
-                             blank=True)
+                              blank=True)

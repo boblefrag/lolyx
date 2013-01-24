@@ -15,31 +15,16 @@
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-"""
-Unit tests for Company object
+from django import forms
+from django.forms.widgets import Textarea
+from django.forms.widgets import TextInput
 
-"""
-from django.contrib.auth.models import User
-from django.test import TestCase
-from lolyx.llx.models import Company
+large = {'class': 'input-xlarge'}
+
+class ResumeForm(forms.Form):  # pylint: disable=R0924
+    
+    title = forms.CharField(max_length=50,
+                            required=True,
+                            widget=TextInput(attrs=large))
 
 
-class CompanyTests(TestCase):  # pylint: disable-msg=R0904
-    """
-    The main tests
-    """
-    def setUp(self):
-        """
-        set up the tests
-        """
-        self.user = User.objects.create_user('foobar',
-                                             'admin_search@bar.com',
-                                             'admintest')
-
-    def test_create(self):
-        """
-        Create a simple company
-        """
-        company = Company.objects.create(name='Lolix')
-
-        self.assertTrue(company.id > 0)

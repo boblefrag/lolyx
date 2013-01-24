@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<div class="row">    
+  <div class="span12">
+    <h3>CV</h3>
+
+    {{ object.title }}
+
+    {{object.user.username}}
+
+  </div>
+</div>
+{% endblock %}
