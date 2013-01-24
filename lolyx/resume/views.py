@@ -59,7 +59,7 @@ class ResumeEdit(DetailView):
         self.object = self.get_object()
         if self.request.user.id != self.object.user.id:
             return redirect('/accounts/profile')
-        return super(CanonicalDetailView, self).get(*args, **kwargs)
+        return super(ResumeEdit, self).get(*args, **kwargs)
 
 
 def new(request):
