@@ -22,6 +22,8 @@ import logging
 
 from django.shortcuts import render
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.views.generic.detail import DetailView
 from lolyx.resume.models import Resume
 from lolyx.resume.forms import ResumeForm
@@ -47,6 +49,10 @@ class ResumeEdit(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ResumeEdit, self).get_context_data(**kwargs)
         return context
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):        
+        return super(ResumeEdit, self).dispatch(*args, **kwargs)
 
     def get(self, *args, **kwargs):
         # Security to edit only own resume

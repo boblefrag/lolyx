@@ -5,7 +5,7 @@
   <div class="span12">
     <h3>Nouveau CV</h3>
 
-    <form class="well form-horizontal" action="/cv/new/" method="post">
+    <form class="form-horizontal" action="/cv/new/" method="post">
       {% csrf_token %}
       <fieldset>
 	{% if helpform == 'notfound' %}
@@ -13,13 +13,22 @@
 	  {% trans "This email address was not found" %}
 	</div>
 	{% endif %}    
-	<div class="control-group">
+	<div class="control-group well">
 	  <label class="control-label" for="firstname">{% trans "Title" %}</label>
 	  <div class="controls">
 	    {{form.title}}
 	    {{form.title.errors}}
 	  </div>
 	</div>
+
+	<div class="control-group well">
+	  <label class="control-label" for="firstname">{% trans "Title" %}</label>
+	  <div class="controls">
+	    {{form.poste_desc}}
+	    {{form.poste_desc.errors}}
+	  </div>
+	</div>
+
 	
 	<div class="control-group">
 	  <input type="submit" class="btn btn-primary" value="{% trans "Save" %}" />

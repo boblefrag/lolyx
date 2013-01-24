@@ -32,6 +32,7 @@ class UrlsTests(TestCase):  # pylint: disable-msg=R0904
         """
         set up the tests
         """
+        Resume.objects.all().delete()
         self.user = User.objects.create_user('foobar',
                                              'admin_search@bar.com',
                                              'admintest')
@@ -47,3 +48,26 @@ class UrlsTests(TestCase):  # pylint: disable-msg=R0904
         response = client.get('/cv/{}/'.format(resume.id))
 
         self.assertContains(response, resume.title, status_code=200)
+
+    def test_new_resume(self):
+        """
+        The view
+        """
+        client = Client()
+        response = client.get('/cv/new/')
+
+        self.assertContains(response, 'form', status_code=200)
+
+    def test_edit(self):
+        """
+        The view
+        """
+        resume = Resume.objects.create(title='Senior admin',
+                                       user=self.user)
+
+        client = Client()
+        client.login(username='foobar', password='admintest')
+        response = client.get('/cv/edit/{}/'.format(resume.id))
+
+        self.assertContains(response, resume.title, status_code=200)
+

@@ -16,13 +16,12 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 from django.conf.urls import patterns, url
-from django.contrib.auth.decorators import login_required
 from lolyx.resume.views import ResumeView
 from lolyx.resume.views import ResumeEdit
 
 urlpatterns = patterns('',
                        url(r'^(?P<pk>\d+)/$', ResumeView.as_view()),
-                       url(r'^edit/(?P<pk>\d+)/$', login_required(ResumeEdit.as_view())),
+                       url(r'^edit/(?P<pk>\d+)/$', ResumeEdit.as_view()),
                        url(r'^new/$', 'lolyx.resume.views.new'),
                        url(r'^$', 'lolyx.llx.views.home', name='resume')
                        )
