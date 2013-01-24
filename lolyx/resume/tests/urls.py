@@ -49,15 +49,6 @@ class UrlsTests(TestCase):  # pylint: disable-msg=R0904
 
         self.assertContains(response, resume.title, status_code=200)
 
-    def test_new_resume(self):
-        """
-        The view
-        """
-        client = Client()
-        response = client.get('/cv/new/')
-
-        self.assertContains(response, 'form', status_code=200)
-
     def test_edit(self):
         """
         The view
@@ -71,3 +62,26 @@ class UrlsTests(TestCase):  # pylint: disable-msg=R0904
 
         self.assertContains(response, resume.title, status_code=200)
 
+    def test_new_resume(self):
+        """
+        The view
+        """
+        client = Client()
+        response = client.get('/cv/new/')
+
+        self.assertContains(response, 'form', status_code=200)
+
+    def test_resume_newpost(self):
+        """
+        The form is valid
+        """
+        token = '88c25fbe6ed4871bf9e8e83820a4e001'
+        datas = {'title': 'foobar',
+                 'csrfmiddlewaretoken': token}
+
+        client = Client()
+        client.login(username='foobar', password='admintest')
+
+        resp = client.post('/cv/new/', datas)
+
+        self.assertEqual(resp.status_code, 200)  # pylint: disable-msg=E1103

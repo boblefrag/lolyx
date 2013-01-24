@@ -21,8 +21,11 @@ from django.forms.widgets import TextInput
 
 large = {'class': 'input-xlarge'}
 
+
 class ResumeForm(forms.Form):  # pylint: disable=R0924
-    
+    """
+    Use to create Resume
+    """
     title = forms.CharField(max_length=50,
                             required=True,
                             widget=TextInput(attrs=large))

@@ -51,7 +51,7 @@ class ResumeEdit(DetailView):
         return context
 
     @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):        
+    def dispatch(self, *args, **kwargs):
         return super(ResumeEdit, self).dispatch(*args, **kwargs)
 
     def get(self, *args, **kwargs):
