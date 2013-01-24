@@ -27,4 +27,4 @@ class ResumeForm(forms.Form):  # pylint: disable=R0924
                             required=True,
                             widget=TextInput(attrs=large))
 
-
+    poste_desc = forms.CharField(max_length=2500)

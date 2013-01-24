@@ -16,17 +16,17 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 """
-Unit tests for Resume object
-
+Test all public and private urls
 """
 from django.contrib.auth.models import User
 from django.test import TestCase
+from django.test import Client
 from lolyx.resume.models import Resume
 
 
-class ResumeTests(TestCase):  # pylint: disable-msg=R0904
+class UrlsTests(TestCase):  # pylint: disable-msg=R0904
     """
-    The main tests
+    The urls
     """
     def setUp(self):
         """
@@ -36,11 +36,14 @@ class ResumeTests(TestCase):  # pylint: disable-msg=R0904
                                              'admin_search@bar.com',
                                              'admintest')
 
-    def test_create(self):
+    def test_view(self):
         """
-        Create a simple resume
+        The view
         """
         resume = Resume.objects.create(title='Senior admin',
                                        user=self.user)
 
-        self.assertTrue(resume.id > 0)
+        client = Client()
+        response = client.get('/cv/{}/'.format(resume.id))
+
+        self.assertContains(response, resume.title, status_code=200)

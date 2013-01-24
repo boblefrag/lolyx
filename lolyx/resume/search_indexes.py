@@ -18,14 +18,13 @@
 """
 Fulltext indexing with haystack
 """
-from django.conf import settings
 from haystack import indexes
 from lolyx.resume.models import Resume
 
 
 class ResumeIndex(indexes.RealTimeSearchIndex, indexes.Indexable):
     """
-    Fulltext indexing for resume    
+    Index for Resume    
     """
     text = indexes.CharField(document=True, use_template=True)
     title = indexes.CharField(model_attr='title')

@@ -23,7 +23,6 @@ import logging
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.views.generic.detail import DetailView
-from django.contrib.auth.models import User
 from lolyx.resume.models import Resume
 from lolyx.resume.forms import ResumeForm
 
@@ -54,8 +53,7 @@ class ResumeEdit(DetailView):
         self.object = self.get_object()
         if self.request.user.id != self.object.user.id:
             return redirect('/accounts/profile')
-        #return http.HttpResponsePermanentRedirect('/accounts/profile/')
-        return super(CanonicalDetailView, self).get(*args, **kwargs);
+        return super(CanonicalDetailView, self).get(*args, **kwargs)
 
 
 def new(request):
@@ -70,7 +68,6 @@ def new(request):
             return redirect('/accounts/profile/')
     else:
         form = ResumeForm()
-
 
     return render(request,
                   'resume/new.html',
