@@ -20,6 +20,7 @@ Models definition for resume
 """
 from django.db import models
 from django.contrib.auth.models import User
+from lolyx.llx.models import Website
 
 
 class Resume(models.Model):
@@ -34,8 +35,18 @@ class Resume(models.Model):
 
     user = models.ForeignKey(User)
 
+    email = models.EmailField(max_length=300)
+    email_verified = models.BooleanField(default=False)
+
     date_published = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
+
+class PeopleRessource(models.Model):
+
+    resume = models.ForeignKey(Resume)
+    website = models.ForeignKey(Website)
+
+    login = models.CharField(max_length=300)

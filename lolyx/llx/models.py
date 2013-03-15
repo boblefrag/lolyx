@@ -80,3 +80,36 @@ class Tool(models.Model):
     # identi.ca category name
     identi = models.CharField(max_length=30,
                               blank=True)
+
+
+class Contract(models.Model):
+    """
+    The tools known by candidat or required by companies
+
+    """
+    code = models.CharField(max_length=30,
+                            verbose_name='Contract name')
+
+    def __unicode__(self):
+        """
+        The unicode method
+        """
+        return self.code
+
+    def __str__(self):
+        """
+        The unicode method
+        """
+        return self.code
+
+
+class Website(models.Model):
+    """
+    The tools known by candidat or required by companies
+
+    """
+    name = models.CharField(max_length=30,
+                            verbose_name='Tool name')
+
+    url = models.URLField(max_length=300)
+    userpage = models.URLField(max_length=300)

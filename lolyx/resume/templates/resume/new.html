@@ -13,6 +13,7 @@
 	  {% trans "This email address was not found" %}
 	</div>
 	{% endif %}    
+
 	<div class="control-group well">
 	  <label class="control-label" for="firstname">{% trans "Title" %}</label>
 	  <div class="controls">
@@ -27,6 +28,26 @@
 	    {{form.poste_desc}}
 	    {{form.poste_desc.errors}}
 	  </div>
+	</div>
+
+
+	<div class="well">
+	  <div class="control-group">
+	    <label class="control-label" for="firstname">{% trans "Twitter" %}</label>
+	    <div class="controls">
+	      {{form.title}}
+	      {{form.title.errors}}
+	    </div>
+	  </div>
+
+	  <div class="control-group">
+	    <label class="control-label" for="firstname">{% trans "Github" %}</label>
+	    <div class="controls">
+	      {{form.title}}
+	      {{form.title.errors}}
+	    </div>
+	  </div>
+
 	</div>
 
 	

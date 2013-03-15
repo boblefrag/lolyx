@@ -19,13 +19,27 @@ from django import forms
 from django.forms.widgets import Textarea
 from django.forms.widgets import TextInput
 
-large = {'class': 'input-xlarge'}
+xlarge = {'class': 'input-xlarge'}
+large = {'class': 'input-large'}
 
 
 class ResumeForm(forms.Form):  # pylint: disable=R0924
     """
     Use to create Resume
     """
+
+    name = forms.CharField(max_length=50,
+                           required=True,
+                           widget=TextInput(attrs=xlarge))
+
+    firstname = forms.CharField(max_length=50,
+                                required=True,
+                                widget=TextInput(attrs=xlarge))
+    
+    email = forms.CharField(max_length=50,
+                            required=True,
+                            widget=TextInput(attrs=xlarge))
+
     title = forms.CharField(max_length=50,
                             required=True,
                             widget=TextInput(attrs=large))
