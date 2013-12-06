@@ -12,11 +12,11 @@
   <input type="hidden" name="next" value="{{ next }}" />
 </form>
 
-  <p>{% trans "Forgot password" %} ? <a href="{% url auth_password_reset %}">{% trans "Reset it" %}</a>!</p>
+  <p>{% trans "Forgot password" %} ? <a href="{% url "auth_password_reset" %}">{% trans "Reset it" %}</a>!</p>
 </div>
 <hr>
 <p>
-  Créer un <a href="/accounts/register/">nouveau compte</a> !
+  Créer un <a href="{% url "registration_register" %}">nouveau compte</a> !
 </p>
 
 {% endblock %}
