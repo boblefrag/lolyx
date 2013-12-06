@@ -16,7 +16,8 @@
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 from django.conf.urls import patterns, include, url
-from django.views.generic.simple import redirect_to
+from django.views.generic import RedirectView
+from django.core.urlresolvers import reverse_lazy
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -28,7 +29,8 @@ urlpatterns = patterns('',
                        url(r'^offres/', include('lolyx.resume.urls')),
                        url(r'^accounts/profile/$', 'lolyx.llx.views.profile'),
                        url(r'^$', 'lolyx.llx.views.home', name='home'),
-                       url(r'^search/cv/$', redirect_to, {'url': '/cv/'}),
-                       url(r'^search/cv/date.php$', redirect_to, {'url': '/cv/date/'}),
+                       url(r'^search/cv/$', RedirectView.as_view(url=reverse_lazy('resume'))),
+                       # TODO: Use reverse_lazy and not hard the path
+                       url(r'^search/cv/date.php$', RedirectView.as_view(url='/cv/date/')),
 
 )
